@@ -1,0 +1,15 @@
+{
+  "generator-bigdatr-startr": {
+    "promptValues": {
+      "name": "dr-symlink",
+      "description": "Symlink Diagnostic CLI",
+      "version": "0.0.0",
+      "license": "UNLICENSED",
+      "private": false,
+      "author": "Allan Hortle",
+      "username": "blueflag",
+      "nameConstant": "DR_SYMLINK",
+      "example": false
+    }
+  }
+}

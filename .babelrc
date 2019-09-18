@@ -1,0 +1,6 @@
+{
+    "presets": [
+        ["blueflag"]
+    ],
+    "ignore": ["./lib"],
+}
