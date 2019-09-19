@@ -32,12 +32,12 @@
   },
   "devDependencies": {
     "@babel/cli": "^7.6.0",
-    "@babel/core": "^7.5.5",
-    "@babel/runtime": "^7.5.5",
+    "@babel/core": "^7.6.0",
+    "@babel/runtime": "^7.6.0",
     "babel-preset-blueflag": "^1.0.1",
     "babel-runtime": "^6.26.0",
     "flow-bin": "^0.108.0",
-    "ws": "^6.1.3"
+    "ws": "^7.1.2"
   },
   "dependencies": {
     "blessed": "^0.1.81",
