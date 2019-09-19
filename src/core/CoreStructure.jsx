@@ -1,11 +1,6 @@
 // @flow
 import type {Node} from 'react';
 import React, {useState, useRef, useEffect} from 'react';
-import {useCoreContext} from './CoreContext';
-import PullrequestView from '../pullrequest/PullrequestView';
-import IssuesView from '../repo/IssuesView';
-import RepoView from '../repo/RepoView';
-import ReleasesView from '../repo/ReleasesView';
 import FileCoverage from '../affordance/FileCoverage';
 import map from 'unmutable/map';
 import pipeWith from 'unmutable/pipeWith';
@@ -13,8 +8,12 @@ import toArray from 'unmutable/toArray';
 import {red, green, yellow} from '../util/tag';
 import screen from './CoreScreen';
 
-export default function CoreStructure(props) {
+type Props = {
+    cwd: string,
+    files: Array<*>
+};
 
+export default function CoreStructure(props: Props) {
     const {files, cwd} = props;
     const [index, setIndex] = useState(null);
     const [file, setFile] = useState(null);

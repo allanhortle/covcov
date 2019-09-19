@@ -16,7 +16,6 @@ program
             map(file => fs.readJSONSync(file))
         );
 
-
         CoreView({files, program});
     });
 
