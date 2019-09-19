@@ -76,20 +76,18 @@ type CoverageData = {
 };
 
 type Props = {
-    data: CoverageData
+    data: CoverageData,
+    canFit: boolean
 };
 
-export default function FileCoverage({data}: Props) {
+export default function FileCoverage({data, canFit}: Props) {
     const text = fs.readFileSync(data.path, 'utf8');
-
-
 
     let lines: Lines = [{text: '', callCount: 0, uncovered: []}]
         .concat(text.split('\n').map(line => ({
             text: line,
             callCount: 0
         })));
-
 
     let uncovered = [];
 
@@ -99,8 +97,6 @@ export default function FileCoverage({data}: Props) {
         const startLine = value.start.line;
         lines[startLine].callCount += data.s[key];
     }
-
-
 
     for(var key in data.fnMap) {
         const value = data.fnMap[key];
@@ -132,20 +128,23 @@ export default function FileCoverage({data}: Props) {
         String(mostCalls).length + 1
     );
 
-    // keep track of the depth of nesting
+    //
+    // iterate through the uncovered lines and
+    // keep track of the depth of nesting through starts and ends
+    // throw away any uncovered lines that are nested as they
+    // will get colored by the parents tags
     let depth = 0;
-
     const uncoveredMap = pipeWith(
         uncovered,
         sortBy(get('line')),
         flatMap(ii => {
             let value;
-            // if starting increase depth then store value
-            // if ending store value then decrease depth
             if(ii.type === 'start') {
+                // if starting increase depth then store value
                 depth++;
                 value = [depth, ii];
             } else {
+                // if ending store value then decrease depth
                 value = [depth, ii];
                 depth--;
             }
@@ -182,32 +181,39 @@ export default function FileCoverage({data}: Props) {
             const low = Math.min(linesWidth, chars.length);
 
             return [
-                //' ',
-                //' '.repeat(high - low),
+                ' ',
+                ' '.repeat(high - low),
                 num ? `{green-fg}${num}x{/}` : String(index),
-                //' │ ',
+                ' │ ',
                 text
-            ];
+            ].join('')
         }),
-        _ => _.slice(1)
+        _ => _.slice(1) // remove the dummy line so we start at 1
     );
-    const longestLine = Math.max(...highlightedText.map(_ => _.length));
 
-    const canFit = false && screen.width >= 144;
-        //<box tags width={callsWidth} left={callsOffset} content={highlightedText.map(get(1)).join('\n')} />
-    return <table
-        tags
-        mouse
-        scrollable
-        border={{type: 'line', left: true, top: false, bottom: false, right: false}}
+    return <box
+        bottom={0}
+        top={0}
         width={canFit ? '60%': '100%'}
+        height={canFit ? '100%': '60%'}
         left={canFit ? '40%' : '0'}
-        bottom={-1}
-        top={-1}
-        noCellBorders={true}
-        fillCellBorders={false}
-        pad={0}
-        align="left"
-        rows={highlightedText}
-    />;
+        top={canFit ? '0' : '40%'}
+    >
+        <box
+            mouse
+            scrollable
+            tags
+            wrap={false}
+            {...{
+                [canFit ? 'width': 'height']: '100%',
+                [canFit ? 'left': 'top']: 1
+
+            }}
+            content={highlightedText.join('\n')}
+        />
+        {canFit
+            ? <line left={0} top={0} orientation="vertical" type="line"/>
+            : <line left={0} top={0} orientation="horizontal" type="line"/>
+        }
+    </box>
 }

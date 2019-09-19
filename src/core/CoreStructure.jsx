@@ -41,8 +41,6 @@ export default function CoreStructure(props) {
     );
 
 
-
-    //log(coverage[index]);
     const coverageStats = coverage.map((data) => {
         const s = Object.values(data.s);
         const b = Object.values(data.b).flat();
@@ -74,43 +72,59 @@ export default function CoreStructure(props) {
         ];
     });
 
+    const [path, statements, branches, functions] = coverageStats[file -1] || [];
     const title = (file === null)
         ? `Coverage: ${cwd}`
-        : coverageStats[file - 1].join(' ').replace(/green|yellow|red/g, 'black')
+        : [
+            statements.replace(/ /g, '').replace('fg}', 'bg}Statements '),
+            branches.replace(/ /g, '').replace('fg}', 'bg}Branches '),
+            functions.replace(/ /g, '').replace('fg}', 'bg}Functions '),
+        ].join('  ')
+    ;
+
+    const canFit = screen.width >= 144;
+    const isOpen = file != null;
+
+    const sizeProps = isOpen
+        ? canFit
+            ? {width: '40%', height: '100%'}
+            : {height: '40%', width: '100%'}
+        : {height: '100%', width: '100%'}
     ;
 
 
     return <box>
-        <listtable
-            height="100%"
-            width="100%"
-            align="left"
-            pad={1}
-            mouse={true}
-            keys={true}
-            focused={true}
-            vi={true}
-            tags={true}
-            invertSelected={true}
-            noCellBorders={true}
-            style={{
-                selected: {
-                    fg: 'black',
-                    bg: 'white'
-                }
-            }}
-            shrink={true}
-            selected={index}
-            onSelect={(data, index) => {
-                setIndex(index);
-                setFile(index);
-            }}
-            rows={pipeWith(
-                coverageStats,
-                _ => [['File', 'Statements', 'Branches', 'Functions']].concat(_)
-            )}
-        />
-        {file != null && <FileCoverage data={coverage[file - 1]} />}
+        <box height="100%-1">
+            <listtable
+                {...sizeProps}
+                align="left"
+                pad={1}
+                mouse={true}
+                keys={true}
+                focused={true}
+                vi={true}
+                tags={true}
+                invertSelected={true}
+                noCellBorders={true}
+                style={{
+                    selected: {
+                        fg: 'black',
+                        bg: 'white'
+                    }
+                }}
+                shrink={true}
+                selected={index}
+                onSelect={(data, index) => {
+                    setIndex(index);
+                    setFile(index);
+                }}
+                rows={pipeWith(
+                    coverageStats,
+                    _ => [['File', 'Statements', 'Branches', 'Functions']].concat(_)
+                )}
+            />
+            {isOpen && <FileCoverage canFit={canFit} data={coverage[file - 1]} />}
+        </box>
         <box bottom={0} height={1} tags style={{bg: 'white', fg: 'black'}} content={title} />
     </box>;
 }
