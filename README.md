@@ -1,6 +1,9 @@
 # covcov
 A terminal UI for coverage reports.
 
+Covcov recursively searches your working directory for Istanbul coverage reports and 
+displays them all in one location.
+
 ![screenshot](screenshot.png)
 
 ## Install
@@ -9,11 +12,9 @@ A terminal UI for coverage reports.
 npm install -g covcov
 ```
 
-generate and set `GITHUB_TOKEN` in your environment
-
-
 
 ## Usage
+Run `cov` or `covcov` in your working directory.  Use arrows or `hjkl` to navigate. `q` to close code view.
 
 ```
 Usage: cov
@@ -21,5 +22,6 @@ Usage: cov
 Options:
   -V, --version  output the version number
   -h, --help     output usage information
+
 ```
 
