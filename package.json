@@ -31,19 +31,18 @@
     "test-all": "yarn lint && yarn flow && yarn test && yarn flow-coverage"
   },
   "devDependencies": {
-    "@babel/cli": "^7.5.5",
+    "@babel/cli": "^7.6.0",
     "@babel/core": "^7.5.5",
     "@babel/runtime": "^7.5.5",
     "babel-preset-blueflag": "^1.0.1",
     "babel-runtime": "^6.26.0",
-    "dotenv": "^8.1.0",
-    "flow-bin": "^0.106.1",
+    "flow-bin": "^0.108.0",
     "ws": "^6.1.3"
   },
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.16",
-    "commander": "^3.0.0",
+    "commander": "^3.0.1",
     "fast-glob": "^3.0.4",
     "fs-extra": "^8.1.0",
     "react": "^16.9.0",
@@ -51,6 +50,6 @@
     "react-blessed-contrib": "^0.2.1",
     "react-devtools-core": "^3.6.3",
     "react-dom": "^16.9.0",
-    "unmutable": "^0.46.0"
+    "unmutable": "^0.46.1"
   }
 }

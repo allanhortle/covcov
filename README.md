@@ -1,9 +1,12 @@
-# hubgit
+# covcov
+A terminal UI for coverage reports.
+
+![screenshot](screenshot.png)
 
 ## Install
 
 ```
-npm install -g hubgit
+npm install -g covcov
 ```
 
 generate and set `GITHUB_TOKEN` in your environment
@@ -13,18 +16,10 @@ generate and set `GITHUB_TOKEN` in your environment
 ## Usage
 
 ```
-  Usage: hub -r org/repo
+Usage: cov
 
-  Options:
-
-    -h, --help     output usage information
-    -V, --version  output the version number
-    -r, --repo     manually choose the org and repo
+Options:
+  -V, --version  output the version number
+  -h, --help     output usage information
 ```
 
-
-## Examples
-
-```
-hub -r facebook/react
-```

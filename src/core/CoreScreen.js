@@ -7,7 +7,7 @@ const screen = blessed.screen({
     smartCSR: true,
     dockBorders: true,
     debug: true,
-    title: 'react-blessed hello world'
+    title: 'covcov'
 });
 
 screen.debugLog.width = '100%';
