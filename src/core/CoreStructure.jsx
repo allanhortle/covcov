@@ -5,6 +5,7 @@ import FileCoverage from '../affordance/FileCoverage';
 import map from 'unmutable/map';
 import pipeWith from 'unmutable/pipeWith';
 import toArray from 'unmutable/toArray';
+import flatten from 'unmutable/flatten';
 import {red, green, yellow} from '../util/tag';
 import screen from './CoreScreen';
 
@@ -42,7 +43,7 @@ export default function CoreStructure(props: Props) {
 
     const coverageStats = coverage.map((data) => {
         const s = Object.values(data.s);
-        const b = Object.values(data.b).flat();
+        const b = flatten(1)(Object.values(data.b));
         const f = Object.values(data.f);
 
         const print = (data) => {
