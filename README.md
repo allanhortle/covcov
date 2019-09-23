@@ -4,7 +4,7 @@ A terminal UI for coverage reports.
 Covcov recursively searches your working directory for Istanbul coverage reports and 
 displays them all in one location.
 
-![screenshot](screenshot.png)
+![screenshot](https://raw.githubusercontent.com/allanhortle/covcov/master/screenshot.png)
 
 ## Install
 
