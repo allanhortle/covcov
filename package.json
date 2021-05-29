@@ -48,6 +48,6 @@
     "react-devtools-core": "^3.6.3",
     "react-dom": "^16.9.0",
     "unmutable": "^0.46.1",
-    "ws": "^6.0.0"
+    "ws": "^7.4.6"
   }
 }
